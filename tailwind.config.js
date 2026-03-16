@@ -10,9 +10,13 @@ export default {
       colors: {
         mahindra: {
           red: '#e31e24',
-          blue: '#1e3c72',
-          darkblue: '#2a5298',
-          lightblue: '#4a90e2',
+          'red-dark': '#c41a1f',
+          'red-light': '#ff3b41',
+          black: '#0a0a0a',
+          'gray-dark': '#1a1a1a',
+          'gray-darker': '#111111',
+          white: '#ffffff',
+          'white-soft': '#f8f8f8',
         },
       },
       animation: {

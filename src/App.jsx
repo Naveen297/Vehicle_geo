@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Moon, Sun, Car, MapPin, FileDown, QrCode, CheckCircle2, AlertCircle } from "lucide-react";
 import QRScanner from "./components/QRScanner";
-import logo from "./assets/App_Icon.png";
+import logo from "./assets/Mahindra_Logo.png";
 
 // Home Screen Component
 const HomeScreen = ({ setCurrentScreen }) => (
@@ -19,11 +19,11 @@ const HomeScreen = ({ setCurrentScreen }) => (
       {/* Park Vehicle Card */}
       <button
         onClick={() => setCurrentScreen("park")}
-        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-gray-800 rounded-xl hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-400 hover:-translate-y-1"
+        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-mahindra-gray-darker rounded-xl hover:shadow-xl hover:border-mahindra-red dark:hover:border-mahindra-red hover:-translate-y-1"
       >
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="p-5 transition-colors rounded-full bg-blue-50 dark:bg-blue-900/30 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50">
-            <Car size={48} className="text-blue-600 dark:text-blue-400" />
+          <div className="p-5 transition-colors rounded-full bg-mahindra-red/10 dark:bg-mahindra-red/20 group-hover:bg-mahindra-red/20 dark:group-hover:bg-mahindra-red/30">
+            <Car size={48} className="text-mahindra-red" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
             Park Vehicle
@@ -37,11 +37,11 @@ const HomeScreen = ({ setCurrentScreen }) => (
       {/* Track Vehicle Card */}
       <button
         onClick={() => setCurrentScreen("track")}
-        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-gray-800 rounded-xl hover:shadow-xl hover:border-green-500 dark:hover:border-green-400 hover:-translate-y-1"
+        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-mahindra-gray-darker rounded-xl hover:shadow-xl hover:border-mahindra-red dark:hover:border-mahindra-red hover:-translate-y-1"
       >
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="p-5 transition-colors rounded-full bg-green-50 dark:bg-green-900/30 group-hover:bg-green-100 dark:group-hover:bg-green-900/50">
-            <MapPin size={48} className="text-green-600 dark:text-green-400" />
+          <div className="p-5 transition-colors rounded-full bg-mahindra-red/10 dark:bg-mahindra-red/20 group-hover:bg-mahindra-red/20 dark:group-hover:bg-mahindra-red/30">
+            <MapPin size={48} className="text-mahindra-red" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
             Track Vehicle
@@ -55,11 +55,11 @@ const HomeScreen = ({ setCurrentScreen }) => (
       {/* Download Report Card */}
       <button
         onClick={() => setCurrentScreen("report")}
-        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-gray-800 rounded-xl hover:shadow-xl hover:border-purple-500 dark:hover:border-purple-400 hover:-translate-y-1"
+        className="p-8 transition-all duration-300 bg-white border-2 border-transparent shadow-md group dark:bg-mahindra-gray-darker rounded-xl hover:shadow-xl hover:border-mahindra-red dark:hover:border-mahindra-red hover:-translate-y-1"
       >
         <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="p-5 transition-colors rounded-full bg-purple-50 dark:bg-purple-900/30 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/50">
-            <FileDown size={48} className="text-purple-600 dark:text-purple-400" />
+          <div className="p-5 transition-colors rounded-full bg-mahindra-red/10 dark:bg-mahindra-red/20 group-hover:bg-mahindra-red/20 dark:group-hover:bg-mahindra-red/30">
+            <FileDown size={48} className="text-mahindra-red" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
             Download Report
@@ -104,10 +104,10 @@ const ParkVehicleScreen = ({
         Back to Home
       </button>
 
-      <div className="p-8 bg-white border border-gray-200 shadow-lg dark:bg-gray-800 rounded-xl dark:border-gray-700">
+      <div className="p-8 bg-white shadow-lg dark:bg-mahindra-gray-darker rounded-xl border-2 border-gray-100 dark:border-mahindra-red/20">
         <div className="flex items-center mb-8">
-          <div className="p-3 mr-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <Car size={32} className="text-blue-600 dark:text-blue-400" />
+          <div className="p-3 mr-4 rounded-lg bg-mahindra-red/10 dark:bg-mahindra-red/20">
+            <Car size={32} className="text-mahindra-red" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -136,7 +136,7 @@ const ParkVehicleScreen = ({
                 }}
                 placeholder="Enter VIN"
                 autoComplete="off"
-                className="w-full px-4 py-3 text-lg placeholder-gray-400 transition-all border-2 border-gray-300 rounded-lg dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+                className="w-full px-4 py-3 text-lg placeholder-gray-400 transition-all border-2 border-gray-300 rounded-lg dark:border-mahindra-red/30 focus:ring-2 focus:ring-mahindra-red focus:border-mahindra-red dark:bg-mahindra-gray-dark dark:text-white dark:placeholder-gray-500"
               />
             </div>
 
@@ -151,7 +151,7 @@ const ParkVehicleScreen = ({
             {/* QR Scan Button */}
             <button
               onClick={() => setIsScanning(true)}
-              className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-gray-900 transition-all bg-gray-100 border-2 border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-600"
+              className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-gray-900 transition-all bg-gray-100 border-2 border-gray-300 rounded-lg dark:bg-mahindra-gray-dark dark:text-white hover:bg-gray-200 dark:hover:bg-mahindra-red/20 dark:border-mahindra-red/30"
             >
               <QrCode size={24} />
               <span>Scan QR Code</span>
@@ -161,7 +161,7 @@ const ParkVehicleScreen = ({
             <button
               onClick={handleConfirmPark}
               disabled={isLoading || !vinNumber.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white py-4 rounded-lg disabled:cursor-not-allowed transition-all font-bold text-lg shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center"
+              className="w-full bg-mahindra-red hover:bg-mahindra-red-dark disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white py-4 rounded-lg disabled:cursor-not-allowed transition-all font-bold text-lg shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -196,47 +196,47 @@ const ParkVehicleScreen = ({
 
             {/* Location Success Display */}
             {location && (
-              <div className="p-6 mt-6 border-2 border-green-300 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-700">
+              <div className="p-6 mt-6 border-2 border-mahindra-red/30 rounded-lg bg-mahindra-red/5 dark:bg-mahindra-red/10 dark:border-mahindra-red/40">
                 <div className="flex items-center mb-4">
-                  <CheckCircle2 size={24} className="mr-2 text-green-600 dark:text-green-400" />
-                  <h3 className="text-lg font-bold text-green-800 dark:text-green-300">
+                  <CheckCircle2 size={24} className="mr-2 text-mahindra-red" />
+                  <h3 className="text-lg font-bold text-mahindra-red-dark dark:text-mahindra-red-light">
                     Location Captured Successfully
                   </h3>
                 </div>
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">VIN Number</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">{vinNumber}</p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Accuracy</p>
                       <p className="text-sm font-semibold text-gray-900 dark:text-white">
                         ±{location.accuracy.toFixed(2)} meters
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Latitude</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">
                         {location.latitude.toFixed(6)}
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Longitude</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">
                         {location.longitude.toFixed(6)}
                       </p>
                     </div>
                   </div>
-                  <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                  <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                     <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Timestamp</p>
                     <p className="text-sm font-semibold text-gray-900 dark:text-white">
                       {new Date(location.timestamp).toLocaleString()}
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 mt-4 border-t border-green-200 dark:border-green-800">
-                  <p className="flex items-center text-xs italic text-green-700 dark:text-green-400">
+                <div className="pt-4 mt-4 border-t border-mahindra-red/20 dark:border-mahindra-red/30">
+                  <p className="flex items-center text-xs italic text-mahindra-red-dark dark:text-mahindra-red-light">
                     <CheckCircle2 size={14} className="mr-1" />
                     Data ready to be saved to database
                   </p>
@@ -286,10 +286,10 @@ const TrackVehicleScreen = ({
         Back to Home
       </button>
 
-      <div className="p-8 bg-white border border-gray-200 shadow-lg dark:bg-gray-800 rounded-xl dark:border-gray-700">
+      <div className="p-8 bg-white shadow-lg dark:bg-mahindra-gray-darker rounded-xl border-2 border-gray-100 dark:border-mahindra-red/20">
         <div className="flex items-center mb-8">
-          <div className="p-3 mr-4 rounded-lg bg-green-50 dark:bg-green-900/30">
-            <MapPin size={32} className="text-green-600 dark:text-green-400" />
+          <div className="p-3 mr-4 rounded-lg bg-mahindra-red/10 dark:bg-mahindra-red/20">
+            <MapPin size={32} className="text-mahindra-red" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -318,7 +318,7 @@ const TrackVehicleScreen = ({
                 }}
                 placeholder="Enter VIN"
                 autoComplete="off"
-                className="w-full px-4 py-3 text-lg placeholder-gray-400 transition-all border-2 border-gray-300 rounded-lg dark:border-gray-600 focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
+                className="w-full px-4 py-3 text-lg placeholder-gray-400 transition-all border-2 border-gray-300 rounded-lg dark:border-mahindra-red/30 focus:ring-2 focus:ring-mahindra-red focus:border-mahindra-red dark:bg-mahindra-gray-dark dark:text-white dark:placeholder-gray-500"
               />
             </div>
 
@@ -333,7 +333,7 @@ const TrackVehicleScreen = ({
             {/* QR Scan Button */}
             <button
               onClick={() => setIsTrackScanning(true)}
-              className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-gray-900 transition-all bg-gray-100 border-2 border-gray-300 rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 dark:border-gray-600"
+              className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-gray-900 transition-all bg-gray-100 border-2 border-gray-300 rounded-lg dark:bg-mahindra-gray-dark dark:text-white hover:bg-gray-200 dark:hover:bg-mahindra-red/20 dark:border-mahindra-red/30"
             >
               <QrCode size={24} />
               <span>Scan QR Code</span>
@@ -343,7 +343,7 @@ const TrackVehicleScreen = ({
             <button
               onClick={handleFetchLocation}
               disabled={isTrackLoading || !trackVinNumber.trim()}
-              className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white py-4 rounded-lg disabled:cursor-not-allowed transition-all font-bold text-lg shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center"
+              className="w-full bg-mahindra-red hover:bg-mahindra-red-dark disabled:bg-gray-400 dark:disabled:bg-gray-600 text-white py-4 rounded-lg disabled:cursor-not-allowed transition-all font-bold text-lg shadow-md hover:shadow-lg active:scale-[0.98] flex items-center justify-center"
             >
               {isTrackLoading ? (
                 <span className="flex items-center justify-center">
@@ -378,63 +378,63 @@ const TrackVehicleScreen = ({
 
             {/* Location Display */}
             {trackLocation && (
-              <div className="p-6 mt-6 border-2 border-green-300 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-700">
+              <div className="p-6 mt-6 border-2 border-mahindra-red/30 rounded-lg bg-mahindra-red/5 dark:bg-mahindra-red/10 dark:border-mahindra-red/40">
                 <div className="flex items-center mb-4">
-                  <CheckCircle2 size={24} className="mr-2 text-green-600 dark:text-green-400" />
-                  <h3 className="text-lg font-bold text-green-800 dark:text-green-300">
+                  <CheckCircle2 size={24} className="mr-2 text-mahindra-red" />
+                  <h3 className="text-lg font-bold text-mahindra-red-dark dark:text-mahindra-red-light">
                     Vehicle Location Found
                   </h3>
                 </div>
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">VIN Number</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">{trackVinNumber}</p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Accuracy</p>
                       <p className="text-sm font-semibold text-gray-900 dark:text-white">
                         ±{trackLocation.accuracy.toFixed(2)} meters
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Latitude</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">
                         {trackLocation.latitude.toFixed(6)}
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Longitude</p>
                       <p className="font-mono text-sm font-semibold text-gray-900 dark:text-white">
                         {trackLocation.longitude.toFixed(6)}
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Parked By</p>
                       <p className="text-sm font-semibold text-gray-900 dark:text-white">
                         {trackLocation.parkedBy}
                       </p>
                     </div>
-                    <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                    <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                       <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Parked At</p>
                       <p className="text-sm font-semibold text-gray-900 dark:text-white">
                         {new Date(trackLocation.parkedAt).toLocaleString()}
                       </p>
                     </div>
                   </div>
-                  <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
+                  <div className="p-3 bg-white rounded-lg dark:bg-mahindra-gray-dark">
                     <p className="mb-1 text-xs text-gray-500 dark:text-gray-400">Last Updated</p>
                     <p className="text-sm font-semibold text-gray-900 dark:text-white">
                       {new Date(trackLocation.timestamp).toLocaleString()}
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 mt-4 border-t border-green-200 dark:border-green-800">
+                <div className="pt-4 mt-4 border-t border-mahindra-red/20 dark:border-mahindra-red/30">
                   <a
                     href={`https://www.google.com/maps?q=${trackLocation.latitude},${trackLocation.longitude}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-full py-3 font-semibold text-white transition-all bg-green-600 rounded-lg hover:bg-green-700"
+                    className="inline-flex items-center justify-center w-full py-3 font-semibold text-white transition-all bg-mahindra-red rounded-lg hover:bg-mahindra-red-dark"
                   >
                     <MapPin size={20} className="mr-2" />
                     View on Google Maps
@@ -468,10 +468,10 @@ const DownloadReportScreen = ({ setCurrentScreen }) => (
         Back to Home
       </button>
 
-      <div className="p-8 bg-white border border-gray-200 shadow-lg dark:bg-gray-800 rounded-xl dark:border-gray-700">
+      <div className="p-8 bg-white shadow-lg dark:bg-mahindra-gray-darker rounded-xl border-2 border-gray-100 dark:border-mahindra-red/20">
         <div className="flex items-center mb-8">
-          <div className="p-3 mr-4 rounded-lg bg-purple-50 dark:bg-purple-900/30">
-            <FileDown size={32} className="text-purple-600 dark:text-purple-400" />
+          <div className="p-3 mr-4 rounded-lg bg-mahindra-red/10 dark:bg-mahindra-red/20">
+            <FileDown size={32} className="text-mahindra-red" />
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -483,8 +483,8 @@ const DownloadReportScreen = ({ setCurrentScreen }) => (
           </div>
         </div>
         <div className="py-16 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 mb-4 bg-purple-100 rounded-full dark:bg-purple-900/30">
-            <FileDown size={48} className="text-purple-600 dark:text-purple-400" />
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-4 bg-mahindra-red/10 rounded-full dark:bg-mahindra-red/20">
+            <FileDown size={48} className="text-mahindra-red" />
           </div>
           <p className="mb-2 text-xl text-gray-600 dark:text-gray-400">Coming Soon</p>
           <p className="text-sm text-gray-500 dark:text-gray-500">This feature is under development</p>
@@ -659,9 +659,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen transition-colors duration-300 bg-white dark:bg-mahindra-black">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <header className="sticky top-0 z-50 bg-white shadow-sm dark:bg-mahindra-gray-darker">
         <div className="px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -670,7 +670,7 @@ function App() {
                 alt="Vehicle Geo Detection"
                 className="object-contain w-auto h-8 sm:h-10 md:h-12"
               />
-              <div className="hidden pl-4 border-l border-gray-300 sm:block dark:border-gray-600">
+              <div className="hidden pl-4 border-l border-mahindra-red sm:block">
                 <h1 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
                   Vehicle Geo Detection
                 </h1>
@@ -681,16 +681,20 @@ function App() {
             </div>
             <button
               onClick={toggleDarkMode}
-              className="p-3 transition-all duration-200 bg-gray-100 rounded-lg dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105 active:scale-95"
+              className="p-3 transition-all duration-200 bg-gray-100 rounded-lg dark:bg-mahindra-gray-dark hover:bg-mahindra-red/10 dark:hover:bg-mahindra-red/20 hover:scale-105 active:scale-95"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
-                <Sun size={22} className="text-yellow-500" />
+                <Sun size={22} className="text-mahindra-red" />
               ) : (
-                <Moon size={22} className="text-gray-700" />
+                <Moon size={22} className="text-mahindra-red" />
               )}
             </button>
           </div>
+        </div>
+        {/* Mahindra Red Accent Line - 35% width, thinnest possible */}
+        <div className="flex justify-center w-full">
+          <div className="w-[35%] h-[0.5px] bg-mahindra-red"></div>
         </div>
       </header>
 
@@ -733,7 +737,10 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto bg-white border-t border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <footer className="mt-auto bg-white dark:bg-mahindra-gray-darker">
+        <div className="flex justify-center w-full">
+          <div className="w-[35%] h-[0.5px] bg-mahindra-red"></div>
+        </div>
         <div className="px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             &copy; {new Date().getFullYear()} Mahindra AI. All rights reserved.

@@ -14,7 +14,7 @@ export default defineConfig({
         name: 'Vehicle Geo Detection',
         short_name: 'VehicleGeo',
         description: 'Vehicle Geo Detection Application',
-        theme_color: '#ffffff',
+        theme_color: '#e31e24',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

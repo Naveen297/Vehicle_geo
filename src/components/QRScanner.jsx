@@ -94,14 +94,14 @@ const QRScanner = ({ onScanSuccess, onClose }) => {
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <Camera size={24} className="text-blue-600 dark:text-blue-400" />
+          <Camera size={24} className="text-mahindra-red" />
           <h3 className="text-xl font-bold text-gray-800 dark:text-white">
             Scan QR Code
           </h3>
         </div>
         <button
           onClick={handleClose}
-          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          className="p-2 hover:bg-gray-100 dark:hover:bg-mahindra-red/20 rounded-lg transition-colors"
         >
           <X size={24} className="text-gray-600 dark:text-gray-300" />
         </button>
@@ -123,13 +123,13 @@ const QRScanner = ({ onScanSuccess, onClose }) => {
           <div
             id="qr-reader"
             ref={scannerRef}
-            className="w-full rounded-lg overflow-hidden border-4 border-blue-500 dark:border-blue-400"
+            className="w-full rounded-lg overflow-hidden border-4 border-mahindra-red"
           />
 
           {isScanning && (
             <div className="text-center space-y-2">
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-mahindra-red rounded-full animate-pulse"></div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Camera active - Position QR code within the frame
                 </p>
@@ -142,7 +142,7 @@ const QRScanner = ({ onScanSuccess, onClose }) => {
 
           <button
             onClick={handleClose}
-            className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all font-semibold"
+            className="w-full bg-gray-200 dark:bg-mahindra-gray-dark text-gray-800 dark:text-white py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-mahindra-red/20 transition-all font-semibold"
           >
             Cancel Scanning
           </button>
