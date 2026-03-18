@@ -41,11 +41,13 @@ const QRScanner = ({ onScanSuccess, onClose }) => {
             (decodedText) => {
               // Success callback
               if (decodedText) {
+                // Extract VIN (part before first underscore)
+                const extractedVIN = decodedText.split('_')[0];
                 html5QrCode.stop().then(() => {
-                  onScanSuccess(decodedText);
+                  onScanSuccess(extractedVIN);
                 }).catch(err => {
                   console.error("Error stopping scanner:", err);
-                  onScanSuccess(decodedText);
+                  onScanSuccess(extractedVIN);
                 });
               }
             },
