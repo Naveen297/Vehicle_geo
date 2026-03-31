@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Mahindra Vehicle Geolocation Web Application
+  vehicle-geo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mahindra-vehicle-geo
+    image: mahindra-vehicle-geo:latest
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=http://mdp-dev-sbu-vin-api.m-devsecops.com
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - vehicle-geo-network
+    labels:
+      - "com.mahindra.project=vehicle-geolocation"
+      - "com.mahindra.environment=production"
+
+networks:
+  vehicle-geo-network:
+    driver: bridge
