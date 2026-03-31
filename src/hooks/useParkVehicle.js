@@ -4,15 +4,18 @@ import { parkVehicle } from '../services/vehicleService';
 
 /**
  * Custom hook for managing Park Vehicle functionality
- * Handles VIN input, image capture, location fetching, and submission
+ * New Flow: VIN -> Location -> Image -> Submit
+ * Handles VIN input, location fetching, image capture (camera/gallery), and submission
  */
 export const useParkVehicle = () => {
   const [vinNumber, setVinNumber] = useState('');
   const [location, setLocation] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [error, setError] = useState('');
-  const fileInputRef = useRef(null);
+  const galleryInputRef = useRef(null);
 
   const { getCurrentLocation, isLoading } = useGeolocation();
 
@@ -33,8 +36,41 @@ export const useParkVehicle = () => {
     }
   };
 
-  // Handle image capture from file input
-  const handleCaptureImage = (event) => {
+  // Show image source modal
+  const handleShowImageModal = () => {
+    setError('');
+
+    if (!vinNumber.trim()) {
+      setError('Please enter a VIN number');
+      return;
+    }
+
+    if (!location) {
+      setError('Please fetch GPS location first');
+      return;
+    }
+
+    setIsImageModalOpen(true);
+  };
+
+  // Handle camera selection - opens real camera component
+  const handleSelectCamera = () => {
+    setIsCameraOpen(true);
+  };
+
+  // Handle gallery selection - opens file picker
+  const handleSelectGallery = () => {
+    galleryInputRef.current?.click();
+  };
+
+  // Handle camera capture from CameraCapture component
+  const handleCameraCapture = (imageData) => {
+    setCapturedImage(imageData);
+    setIsCameraOpen(false);
+  };
+
+  // Handle image upload from gallery (file input)
+  const handleGalleryUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -131,6 +167,8 @@ export const useParkVehicle = () => {
     setLocation(null);
     setCapturedImage(null);
     setIsScanning(false);
+    setIsImageModalOpen(false);
+    setIsCameraOpen(false);
     setError('');
   };
 
@@ -141,12 +179,20 @@ export const useParkVehicle = () => {
     capturedImage,
     isScanning,
     setIsScanning,
+    isImageModalOpen,
+    setIsImageModalOpen,
+    isCameraOpen,
+    setIsCameraOpen,
     isLoading,
     error,
     setError,
-    fileInputRef,
+    galleryInputRef,
     handleFetchLocationOnly,
-    handleCaptureImage,
+    handleShowImageModal,
+    handleSelectCamera,
+    handleSelectGallery,
+    handleCameraCapture,
+    handleGalleryUpload,
     handleFinalSubmit,
     handleScanSuccess,
     resetParkVehicle,

@@ -2,7 +2,9 @@ import { Car, QrCode, CheckCircle2, Camera, MapPin } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { useParkVehicle } from '../../hooks/useParkVehicle';
 import BackButton from '../common/BackButton';
+import CameraCapture from '../common/CameraCapture';
 import ErrorMessage from '../common/ErrorMessage';
+import ImageSourceModal from '../common/ImageSourceModal';
 import LoadingSpinner from '../common/LoadingSpinner';
 import LocationDisplay from '../common/LocationDisplay';
 import StepIndicator from '../common/StepIndicator';
@@ -11,7 +13,8 @@ import QRScanner from '../QRScanner';
 
 /**
  * ParkVehicleScreen Component
- * Screen for parking vehicles with VIN, image capture, and GPS location
+ * New Flow: VIN -> Location (Step 1) -> Image (Step 2) -> Submit (Step 3)
+ * Screen for parking vehicles with VIN, GPS location, and image capture
  */
 const ParkVehicleScreen = () => {
   const { navigateHome } = useApp();
@@ -22,12 +25,20 @@ const ParkVehicleScreen = () => {
     capturedImage,
     isScanning,
     setIsScanning,
+    isImageModalOpen,
+    setIsImageModalOpen,
+    isCameraOpen,
+    setIsCameraOpen,
     isLoading,
     error,
     setError,
-    fileInputRef,
+    galleryInputRef,
     handleFetchLocationOnly,
-    handleCaptureImage,
+    handleShowImageModal,
+    handleSelectCamera,
+    handleSelectGallery,
+    handleCameraCapture,
+    handleGalleryUpload,
     handleFinalSubmit,
     handleScanSuccess,
     resetParkVehicle,
@@ -96,55 +107,12 @@ const ParkVehicleScreen = () => {
               <span>Scan QR Code</span>
             </button>
 
-            {/* Step 1: Capture Image Button */}
-            {vinNumber.trim() && !capturedImage && (
+            {/* Step 1: Fetch Location Button */}
+            {vinNumber.trim() && !location && (
               <div className="space-y-3">
                 <StepIndicator
                   step={1}
-                  title="Next Step: Capture vehicle image"
-                  variant="success"
-                />
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleCaptureImage}
-                  accept="image/*"
-                  capture="environment"
-                  className="hidden"
-                />
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-white transition-all bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg active:scale-[0.98]"
-                >
-                  <Camera size={24} />
-                  <span>Capture Vehicle Image</span>
-                </button>
-              </div>
-            )}
-
-            {/* Image Preview */}
-            {capturedImage && (
-              <div className="p-4 border-2 border-green-300 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-800">
-                <div className="flex items-center mb-3">
-                  <CheckCircle2 size={20} className="mr-2 text-green-600 dark:text-green-400" />
-                  <p className="font-semibold text-green-700 dark:text-green-300">
-                    Step 1 Complete: Image Captured
-                  </p>
-                </div>
-                <img
-                  src={capturedImage}
-                  alt="Captured vehicle"
-                  className="w-full rounded-lg shadow-md"
-                />
-              </div>
-            )}
-
-            {/* Step 2: Fetch Location Button */}
-            {capturedImage && !location && (
-              <div className="space-y-3">
-                <StepIndicator
-                  step={2}
-                  title="Next Step: Fetch GPS location"
+                  title="Step 1: Fetch GPS location"
                   variant="info"
                 />
                 <button
@@ -169,16 +137,59 @@ const ParkVehicleScreen = () => {
               <LocationDisplay
                 location={location}
                 vinNumber={vinNumber}
-                title="Step 2 Complete: GPS Location Captured"
+                title="Step 1 Complete: GPS Location Captured"
               />
             )}
 
+            {/* Step 2: Capture Image Button */}
+            {location && !capturedImage && (
+              <div className="space-y-3">
+                <StepIndicator
+                  step={2}
+                  title="Step 2: Capture vehicle image"
+                  variant="success"
+                />
+                {/* Hidden file input for gallery only */}
+                <input
+                  type="file"
+                  ref={galleryInputRef}
+                  onChange={handleGalleryUpload}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <button
+                  onClick={handleShowImageModal}
+                  className="flex items-center justify-center w-full py-4 space-x-3 font-semibold text-white transition-all bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg active:scale-[0.98]"
+                >
+                  <Camera size={24} />
+                  <span>Capture Vehicle Image</span>
+                </button>
+              </div>
+            )}
+
+            {/* Image Preview */}
+            {capturedImage && (
+              <div className="p-4 border-2 border-green-300 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-800">
+                <div className="flex items-center mb-3">
+                  <CheckCircle2 size={20} className="mr-2 text-green-600 dark:text-green-400" />
+                  <p className="font-semibold text-green-700 dark:text-green-300">
+                    Step 2 Complete: Image Captured
+                  </p>
+                </div>
+                <img
+                  src={capturedImage}
+                  alt="Captured vehicle"
+                  className="w-full rounded-lg shadow-md"
+                />
+              </div>
+            )}
+
             {/* Step 3: Final Submit Button */}
-            {capturedImage && location && (
+            {location && capturedImage && (
               <div className="space-y-3">
                 <StepIndicator
                   step={3}
-                  title="Final Step: Submit vehicle data to database"
+                  title="Step 3: Submit vehicle data to database"
                   variant="primary"
                 />
                 <button
@@ -190,6 +201,21 @@ const ParkVehicleScreen = () => {
                 </button>
               </div>
             )}
+
+            {/* Image Source Modal */}
+            <ImageSourceModal
+              isOpen={isImageModalOpen}
+              onClose={() => setIsImageModalOpen(false)}
+              onSelectCamera={handleSelectCamera}
+              onSelectGallery={handleSelectGallery}
+            />
+
+            {/* Camera Capture Component */}
+            <CameraCapture
+              isOpen={isCameraOpen}
+              onClose={() => setIsCameraOpen(false)}
+              onCapture={handleCameraCapture}
+            />
           </div>
         </div>
       </div>
