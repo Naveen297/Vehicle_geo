@@ -1,13 +1,14 @@
-/**
- * API Configuration
- * Centralized API configuration for the application
- */
-
 export const API_CONFIG = {
-  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://mdp-dev-sbu-vin-api.m-devsecops.com',
+  // Base URL for the backend API
+  // Development: http://localhost:8080 (Flask backend)
+  // Production Backend: http://mdp-dev-sbu-vin-api.m-devsecops.com
+  // Production: Use VITE_API_BASE_URL environment variable
+  BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+
   ENDPOINTS: {
-    PARK_VEHICLE: '/park-vehicle',
-    TRACK_VEHICLE: '/track-vehicle',
+    PARK_VEHICLE: '/upload', // Flask endpoint: POST /upload
+    TRACK_VEHICLE: '/location', // Flask endpoint: GET /location?vin={vin}
   },
+
   TIMEOUT: 30000, // 30 seconds
 };

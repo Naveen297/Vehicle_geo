@@ -28,10 +28,22 @@ export const parkVehicle = async (vehicleData) => {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `Failed to park vehicle: ${response.status} ${response.statusText}`);
+      // Handle Flask backend error format: { "status": "error", "details": [...] }
+      const errorMessage = errorData.details
+        ? (Array.isArray(errorData.details) ? errorData.details.join(', ') : errorData.details)
+        : (errorData.message || `Server error: ${response.status} ${response.statusText}`);
+      throw new Error(errorMessage);
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    // Validate response format from Flask backend
+    // Expected: { "status": "success", "image_path": "gs://..." }
+    if (!data.status) {
+      throw new Error('Invalid response format from server');
+    }
+
+    return data;
   } catch (error) {
     if (error.name === 'AbortError') {
       throw new Error('Request timeout - please try again');
@@ -42,15 +54,29 @@ export const parkVehicle = async (vehicleData) => {
 
 /**
  * Fetch vehicle location from the database by VIN
+ * Flask endpoint: GET /location?vin={vin}
  * @param {string} vin - Vehicle Identification Number
  * @returns {Promise<Object>} Vehicle location data
+ * Response format: {
+ *   "status": "success",
+ *   "data": {
+ *     "vin": "...",
+ *     "location": {
+ *       "latitude": number,
+ *       "longitude": number,
+ *       "accuracy": number,
+ *       "timestamp": "ISO string"
+ *     }
+ *   }
+ * }
  */
 export const fetchVehicleLocation = async (vin) => {
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.TIMEOUT);
 
-    const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.TRACK_VEHICLE}/${vin}`, {
+    // Flask backend uses query parameter: /location?vin={vin}
+    const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.TRACK_VEHICLE}?vin=${encodeURIComponent(vin)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -62,13 +88,29 @@ export const fetchVehicleLocation = async (vin) => {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      if (response.status === 404) {
-        throw new Error('Vehicle not found');
+
+      // Handle Flask backend error format: { "status": "error", "message": "..." }
+      if (response.status === 404 || errorData.message === 'VIN not found') {
+        throw new Error('Vehicle not found. Please check the VIN number.');
       }
-      throw new Error(errorData.message || `Failed to fetch vehicle location: ${response.status} ${response.statusText}`);
+
+      const errorMessage = errorData.message || `Server error: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    // Validate response format from Flask backend
+    // Expected: { "status": "success", "data": { "vin": "...", "location": {...} } }
+    if (!data.status || data.status !== 'success') {
+      throw new Error(data.message || 'Invalid response format from server');
+    }
+
+    if (!data.data || !data.data.location) {
+      throw new Error('Location data not found in response');
+    }
+
+    return data;
   } catch (error) {
     if (error.name === 'AbortError') {
       throw new Error('Request timeout - please try again');

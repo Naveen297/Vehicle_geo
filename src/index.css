@@ -2,3 +2,100 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Georama Font Global Application */
+@layer base {
+  * {
+    @apply font-georama antialiased;
+  }
+
+  body {
+    @apply font-georama font-normal antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Heading Font Weights */
+  h1 {
+    @apply font-bold;
+  }
+
+  h2 {
+    @apply font-bold;
+  }
+
+  h3 {
+    @apply font-semibold;
+  }
+
+  h4 {
+    @apply font-semibold;
+  }
+
+  h5 {
+    @apply font-medium;
+  }
+
+  h6 {
+    @apply font-medium;
+  }
+
+  /* Button Font Weights */
+  button {
+    @apply font-semibold;
+  }
+
+  /* Input Font Weights */
+  input, textarea, select {
+    @apply font-normal;
+  }
+
+  /* Label Font Weights */
+  label {
+    @apply font-medium;
+  }
+
+  /* Strong and Bold */
+  strong, b {
+    @apply font-bold;
+  }
+}
+
+/* Custom Font Weight Utilities */
+@layer utilities {
+  .font-thin {
+    font-weight: 100;
+  }
+
+  .font-extralight {
+    font-weight: 200;
+  }
+
+  .font-light {
+    font-weight: 300;
+  }
+
+  .font-normal {
+    font-weight: 400;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .font-extrabold {
+    font-weight: 800;
+  }
+
+  .font-black {
+    font-weight: 900;
+  }
+}

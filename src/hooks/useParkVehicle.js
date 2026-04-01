@@ -138,18 +138,31 @@ export const useParkVehicle = () => {
       console.log(JSON.stringify(response, null, 2));
       console.log('='.repeat(80) + '\n');
 
-      alert('✅ Vehicle parked successfully!\n\nVehicle data has been submitted to the backend.');
+      // Handle backend response format: { "status": "success", "image_path": "gs://..." }
+      if (response.status === 'success') {
+        const successMessage = `✅ Vehicle parked successfully!\n\nVIN: ${vinNumber}\nImage stored at: ${response.image_path || 'Backend storage'}\n\nVehicle data has been submitted to the backend.`;
+        alert(successMessage);
 
-      // Reset form after successful submission
-      resetParkVehicle();
+        // Reset form after successful submission
+        resetParkVehicle();
 
-      return response;
+        return response;
+      } else {
+        // Handle unexpected response format
+        throw new Error(response.details || 'Unexpected response from server');
+      }
     } catch (error) {
       console.error('❌ ERROR - Failed to park vehicle:');
       console.error(error);
       console.log('='.repeat(80) + '\n');
 
-      setError(error.message || 'Failed to park vehicle. Please try again.');
+      // Display detailed error message
+      const errorMessage = error.message || 'Failed to park vehicle. Please try again.';
+      setError(`Failed to submit: ${errorMessage}`);
+
+      // Show error alert
+      alert(`❌ Failed to park vehicle\n\n${errorMessage}\n\nPlease check your connection and try again.`);
+
       throw error;
     }
   };
